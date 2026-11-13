@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .todo-container{
+            max-height: 90vh;
+            width: 350px;
+            text-align: center;
+            border-radius: 30px;
+            color: hotpink;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 8px 32px hotpink;
+            padding-bottom: 30px;
+        }
+        .header{
+            font-size: 20px;
+            padding-top: 20px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .input-section{
+            width: 280px;
+            height: 40px;
+            display: flex;
+            gap: 5px;
+        }
+        .input-section input{
+            width: 100%;
+            height: 100%;
+            border: 2px solid hotpink;
+        }
+         .input-section button{
+            color: hotpink;
+            border: none;
+            font-size: 25px;
+            background-color: transparent;
+            outline: none;
+         }
+         .tick{
+            position: absolute;
+            left: 10px;
+         }
+         .tick:hover{
+            color: hotpink;
+         }
+         .delete:hover{
+            color: hotpink;
+         }
+         .delete{
+            position: absolute;
+            right: 10px;
+         }
+        .done{
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .todo-list{    
+            margin-right: 27px;
+        }
+        .todo-list>li{
+            list-style: none;
+            border: 1px solid hotpink;
+            width: 246px;
+            height: 40px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <div class="header">
+            <h2> <i class="fa-solid fa-list"></i>Todo List</h2>
+        </div>
+        <div class="input-section">
+            <input type="text">
+            <button class="btn" onclick="addlist()"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        
+        <ul class="todo-list">
+            <!-- <li>
+                <span class="tickspan"></span>
+                    taxt
+                <span class="deletspan"></span>
+            </li> -->
+        </ul>
+    </div>
+
+    <script>
+        const input = document.querySelector("input");
+        const todolist = document.querySelector("ul");
+        // console.log(todolist);
+        // console.log(input);
+        function addlist(){
+            var task = input.value;
+            //console.log(task);
+            if(task!=""){
+                const li = document.createElement("li");
+                // li.innerHTML = task;
+                //console.log(li);
+
+                const spantick = document.createElement("span");
+                spantick.innerHTML = '<i class="fa-solid fa-check"></i>';
+                spantick.classList.add("tick");
+                //console.log(spantick);
+                
+                const spandelete = document.createElement("span");
+                spandelete.classList.add("delete");
+                spandelete.innerHTML = '<i class="fa-solid fa-trash"></i>'
+                //console.log(spandelete); 
+
+                li.append(spantick);
+                li.append(task);
+                li.append(spandelete);
+                console.log(li);
+                
+
+                spantick.onclick=function(){
+                    li.classList.toggle("done");
+                }
+                spandelete.onclick=function(){
+                    li.remove()
+                }
+
+                todolist.append(li);
+                input.value=""
+            }}
+            
+            
+        input.addEventListener("keyup",function(e){
+                if(e.key=="Enter"){
+                    addlist()
+              }
+
+            }
+            )
+            
+        
+ 
+      
+    </script>
+</body>
+</html>
